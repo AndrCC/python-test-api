@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 import re
 
 app = Flask(__name__)
+app.json.ensure_ascii = False
 
 with open("blacklist.txt", "r") as file:
     blacklist = set(
