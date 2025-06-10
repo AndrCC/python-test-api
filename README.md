@@ -1,6 +1,7 @@
 # 🧪 API de Verificação de CPF em Blacklist
 
 Este projeto é uma API REST desenvolvida em Python utilizando o framework Flask. A API permite verificar se um determinado número de CPF está presente em uma blacklist.
+Agora a aplicação permite configurar o arquivo de blacklist por meio da variável de ambiente `BLACKLIST_FILE`, tornando o serviço mais flexível.
 
 ## 🚀 Pré-requisitos
 
@@ -28,15 +29,21 @@ Este projeto é uma API REST desenvolvida em Python utilizando o framework Flask
    ```bash
    pip install -r requirements.txt
    ```
+4. (Opcional) instale as dependências de desenvolvimento para rodar os testes:
+
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
 
 ## 🧪 Como usar
 
 1. **Adicione os CPFs à blacklist:**  
    Insira os CPFs bloqueados, um por linha, no arquivo `blacklist.txt`.
 
-2. **Execute a aplicação:**  
+2. **Execute a aplicação:**
+   Por padrão o arquivo `blacklist.txt` é utilizado. Caso queira especificar outro caminho, defina a variável de ambiente `BLACKLIST_FILE`.
    ```bash
-   python app.py
+   BLACKLIST_FILE=/caminho/para/blacklist.txt python app.py
    ```
 
 3. **Faça uma requisição:**  
@@ -58,21 +65,21 @@ Este projeto é uma API REST desenvolvida em Python utilizando o framework Flask
      }
      ```
    - Se o CPF estiver na blacklist:
-     ```json
-     {
-       "status": "BLOCK"
-     }
-     ```
+   ```json
+   {
+     "status": "BLOCK"
+   }
+   ```
+   - Se o CPF contiver caracteres inválidos ou número de dígitos incorreto, a API responderá com um erro e código HTTP `400`.
 
 ## 🧪 Testes
 
-Você pode testar manualmente utilizando o comando abaixo:
+Instale as dependências de desenvolvimento e execute os testes automatizados com `pytest`:
 
 ```bash
-curl http://127.0.0.1:5000/00000000000
+pip install -r requirements-dev.txt
+pytest
 ```
-
-A resposta será um JSON indicando o status do CPF consultado.
 
 ## 🛠️ Tecnologias utilizadas
 
